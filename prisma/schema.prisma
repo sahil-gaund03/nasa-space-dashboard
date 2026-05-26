@@ -1,0 +1,56 @@
+datasource db {
+  provider = "postgresql"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id        String     @id @default(uuid())
+  email     String     @unique
+  name      String?
+  clerkId   String?    @unique
+  createdAt DateTime   @default(now())
+  favorites Favorite[]
+  chats     AIChat[]
+}
+
+model Favorite {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  itemType  String   // "apod" | "asteroid" | "mars" | "launch"
+  itemId    String   // APOD date, Asteroid ID, Mars Photo URL, SpaceX Launch ID
+  metadata  Json?    // Cached object payload
+  createdAt DateTime @default(now())
+
+  @@unique([userId, itemType, itemId])
+}
+
+model ApodCache {
+  date        String   @id // YYYY-MM-DD
+  title       String
+  explanation String
+  imageUrl    String
+  hdImageUrl  String?
+  aiSummary   String?
+  copyright   String?
+  createdAt   DateTime @default(now())
+}
+
+model AIChat {
+  id        String   @id @default(uuid())
+  userId    String?
+  user      User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  prompt    String
+  response  String
+  createdAt DateTime @default(now())
+}
+
+model SystemLog {
+  id        String   @id @default(uuid())
+  timestamp DateTime @default(now())
+  tag       String   // "TLE" | "DSN" | "NEO" | "SOL" | "M2020" | "SPX" | "SYS"
+  message   String
+}

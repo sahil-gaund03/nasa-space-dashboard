@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import { nasaService } from "@/services/nasa";
 
+export const dynamic = "force-dynamic";
+
 export async function GET() {
   try {
     const asteroids = await nasaService.getAsteroidsToday();

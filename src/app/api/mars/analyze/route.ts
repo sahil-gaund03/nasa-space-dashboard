@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import { geminiService } from "@/services/gemini";
 
+export const dynamic = "force-dynamic";
+
 export async function POST(req: Request) {
   try {
     const { imageUrl } = await req.json();

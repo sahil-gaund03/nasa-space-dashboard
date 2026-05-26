@@ -3,6 +3,8 @@ import { nasaService } from "@/services/nasa";
 import { geminiService } from "@/services/gemini";
 import { dbService } from "@/lib/db-service";
 
+export const dynamic = "force-dynamic";
+
 export async function GET(req: Request) {
   try {
     const urlObj = new URL(req.url);

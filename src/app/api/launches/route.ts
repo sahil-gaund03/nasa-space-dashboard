@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import { spacexService } from "@/services/spacex";
 
+export const dynamic = "force-dynamic";
+
 export async function GET() {
   try {
     const launch = await spacexService.getNextLaunch();

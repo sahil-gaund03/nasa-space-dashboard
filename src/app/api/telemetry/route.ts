@@ -4,6 +4,8 @@ import { spacexService } from "@/services/spacex";
 import { nasaService } from "@/services/nasa";
 import { dbService } from "@/lib/db-service";
 
+export const dynamic = "force-dynamic";
+
 export async function GET() {
   try {
     // Resolve all telemetry in parallel with error catchers so one API failure doesn't crash the dashboard

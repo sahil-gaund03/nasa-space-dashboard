@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import { geminiService } from "@/services/gemini";
 import { dbService } from "@/lib/db-service";
 
+export const dynamic = "force-dynamic";
+
 export async function GET() {
   try {
     const chats = await dbService.getChats();

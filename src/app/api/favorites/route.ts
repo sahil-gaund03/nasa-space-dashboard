@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import { dbService } from "@/lib/db-service";
 
+export const dynamic = "force-dynamic";
+
 export async function GET() {
   try {
     const favorites = await dbService.getFavorites();
